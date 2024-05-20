@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static java.lang.String.format;
-
 @Component
 @RequiredArgsConstructor
 public class Runner {
@@ -19,6 +17,7 @@ public class Runner {
     private final RelatedFilesEnricher relatedFilesEnricher;
     private final JulaProcessor julaProcessor;
     private final TestFileWriter testFileWriter;
+    private final JulaAnnotationCleaner julaAnnotationCleaner;
 
     public void run() {
 
@@ -30,6 +29,7 @@ public class Runner {
         process(javaFiles);
 
         javaFiles.forEach(testFileWriter::writeTestFile);
+        javaFiles.forEach(julaAnnotationCleaner::cleanJulaAnnotation);
     }
 
     private void enrichWithPayloads(List<JavaFile> javaFiles) {
