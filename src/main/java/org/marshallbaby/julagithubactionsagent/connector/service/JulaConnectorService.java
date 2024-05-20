@@ -1,7 +1,6 @@
 package org.marshallbaby.julagithubactionsagent.connector.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.marshallbaby.julagithubactionsagent.connector.client.JulaConnectorClient;
 import org.marshallbaby.julagithubactionsagent.domain.Task;
 import org.marshallbaby.julagithubactionsagent.domain.TaskResponse;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class JulaConnectorService {
@@ -22,8 +20,6 @@ public class JulaConnectorService {
     private final JulaConnectorClient julaConnectorClient;
 
     public UUID publishQuery(String query) {
-
-        log.info("Pushing query: [{}] to the queue", query.substring(0, 30));
 
         Task task = buildTask(query);
         String uuid = julaConnectorClient.publishTask(task);
@@ -38,8 +34,6 @@ public class JulaConnectorService {
             )
     )
     public String receiveResponse(UUID taskId) {
-
-        log.info("Fetching response: [{}].", taskId);
 
         TaskResponse taskResponse = julaConnectorClient.getTaskResponse(taskId);
 

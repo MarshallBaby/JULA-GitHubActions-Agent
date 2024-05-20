@@ -1,6 +1,7 @@
 package org.marshallbaby.julagithubactionsagent.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.marshallbaby.julagithubactionsagent.domain.JavaFile;
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.ChatResponse;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class JulaProcessor {
@@ -25,8 +27,6 @@ public class JulaProcessor {
 
     public void process(JavaFile javaFile) {
 
-        System.out.println();
-
         PromptTemplate template = new PromptTemplate(promptTemplate);
         Prompt prompt = template.create(Map.of(
                 "javafile", javaFile.getPayload(),
@@ -34,10 +34,10 @@ public class JulaProcessor {
                 "relatedfiles", formatRelatedFiles(javaFile.getRelatedFilesPayloads())
         ));
 
+        log.info("Calling LLM engine for file: [{}].", javaFile.getFilePath());
         ChatResponse chatResponse = julaChatClient.call(prompt);
+        log.info("Received response from LLM engine for file: [{}].", javaFile.getFilePath());
         javaFile.setTestPayload(chatResponse.getResult().getOutput().getContent());
-
-        System.out.println(javaFile);
     }
 
     private String formatRelatedFiles(List<String> relatedFiles) {

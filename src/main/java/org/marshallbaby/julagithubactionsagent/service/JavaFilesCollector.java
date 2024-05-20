@@ -2,6 +2,7 @@ package org.marshallbaby.julagithubactionsagent.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.LineIterator;
 import org.marshallbaby.julagithubactionsagent.domain.JavaFile;
@@ -14,6 +15,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class JavaFilesCollector {
@@ -25,6 +27,7 @@ public class JavaFilesCollector {
 
         return getRequiredFiles()
                 .stream()
+                .peek(file -> log.info("Test will be generated for file: [{}].", file))
                 .map(JavaFile::new)
                 .toList();
     }
