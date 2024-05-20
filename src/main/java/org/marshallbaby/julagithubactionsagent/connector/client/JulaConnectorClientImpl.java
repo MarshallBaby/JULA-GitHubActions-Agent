@@ -1,4 +1,4 @@
-package org.marshallbaby.julagithubactionsagent.client;
+package org.marshallbaby.julagithubactionsagent.connector.client;
 
 import lombok.RequiredArgsConstructor;
 import org.marshallbaby.julagithubactionsagent.domain.Task;

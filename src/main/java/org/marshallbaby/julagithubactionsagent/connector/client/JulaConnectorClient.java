@@ -1,4 +1,4 @@
-package org.marshallbaby.julagithubactionsagent.client;
+package org.marshallbaby.julagithubactionsagent.connector.client;
 
 import org.marshallbaby.julagithubactionsagent.domain.Task;
 import org.marshallbaby.julagithubactionsagent.domain.TaskResponse;

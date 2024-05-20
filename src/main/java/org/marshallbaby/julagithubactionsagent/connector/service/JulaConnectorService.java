@@ -1,7 +1,8 @@
-package org.marshallbaby.julagithubactionsagent.ai;
+package org.marshallbaby.julagithubactionsagent.connector.service;
 
 import lombok.RequiredArgsConstructor;
-import org.marshallbaby.julagithubactionsagent.client.JulaConnectorClient;
+import lombok.extern.slf4j.Slf4j;
+import org.marshallbaby.julagithubactionsagent.connector.client.JulaConnectorClient;
 import org.marshallbaby.julagithubactionsagent.domain.Task;
 import org.marshallbaby.julagithubactionsagent.domain.TaskResponse;
 import org.marshallbaby.julagithubactionsagent.exception.TaskIncompleteException;
@@ -11,15 +12,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
-public class JulaConntectorService {
+public class JulaConnectorService {
 
     private static final String TASK_COMPLETE_STATUS = "COMPLETE";
 
     private final JulaConnectorClient julaConnectorClient;
 
     public UUID publishQuery(String query) {
+
+        log.info("Pushing query: [{}] to the queue", query.substring(0, 30));
 
         Task task = buildTask(query);
         String uuid = julaConnectorClient.publishTask(task);
@@ -34,6 +38,8 @@ public class JulaConntectorService {
             )
     )
     public String receiveResponse(UUID taskId) {
+
+        log.info("Fetching response: [{}].", taskId);
 
         TaskResponse taskResponse = julaConnectorClient.getTaskResponse(taskId);
 

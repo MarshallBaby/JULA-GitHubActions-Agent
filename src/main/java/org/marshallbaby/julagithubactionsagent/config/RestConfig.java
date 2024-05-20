@@ -1,7 +1,7 @@
 package org.marshallbaby.julagithubactionsagent.config;
 
-import org.marshallbaby.julagithubactionsagent.client.JulaConnectorClient;
-import org.marshallbaby.julagithubactionsagent.client.JulaConnectorClientImpl;
+import org.marshallbaby.julagithubactionsagent.connector.client.JulaConnectorClient;
+import org.marshallbaby.julagithubactionsagent.connector.client.JulaConnectorClientImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
