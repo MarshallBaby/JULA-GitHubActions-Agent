@@ -1,12 +1,11 @@
-Do NOT include any comments or markdown in the response, put only code.
-Try to keep same formatting and style as source code.
-Add "Test" postfix to classname of generated test.
-TASK: Generate JUnit test class for the following class:
+JAVA CLASS:
 
 {javafile}
 
-pom.xml file of the project:
+POM.XML FILE:
+
 {pomfile}
 
-Related files:
+RELATED JAVA FILES:
+
 {relatedfiles}

@@ -42,7 +42,11 @@ public class JulaProcessor {
     private String formatRelatedFiles(List<String> relatedFiles) {
 
         StringBuilder stringBuilder = new StringBuilder();
-        relatedFiles.forEach(file -> stringBuilder.append(file).append("\n\n"));
+        relatedFiles.forEach(file -> stringBuilder.append(file)
+                .append("\n\n")
+                .append("-----")
+                .append("\n\n")
+        );
         return stringBuilder.toString();
     }
 
