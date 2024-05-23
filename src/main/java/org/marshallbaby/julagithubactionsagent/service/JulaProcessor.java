@@ -34,9 +34,8 @@ public class JulaProcessor {
                 "relatedfiles", formatRelatedFiles(javaFile.getRelatedFilesPayloads())
         ));
 
-        log.info("Calling LLM engine for file: [{}].", javaFile.getFilePath());
         ChatResponse chatResponse = julaChatClient.call(prompt);
-        log.info("Received response from LLM engine for file: [{}].", javaFile.getFilePath());
+        log.info("---> Received response from LLM engine for file: [{}].", javaFile.getFilePath());
         javaFile.setTestPayload(chatResponse.getResult().getOutput().getContent());
     }
 

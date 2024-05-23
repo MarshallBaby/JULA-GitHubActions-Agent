@@ -1,4 +1,4 @@
-package org.marshallbaby.julagithubactionsagent.ai;
+package org.marshallbaby.julagithubactionsagent.connector.chat;
 
 import lombok.RequiredArgsConstructor;
 import org.marshallbaby.julagithubactionsagent.connector.service.JulaConnectorService;
