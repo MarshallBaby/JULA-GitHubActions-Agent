@@ -30,7 +30,7 @@ public class JulaConnectorService {
             retryFor = {TaskIncompleteException.class},
             maxAttempts = 150,
             backoff = @Backoff(
-                    delay = 2000
+                    delay = 5000
             )
     )
     public String receiveResponse(UUID taskId) {
