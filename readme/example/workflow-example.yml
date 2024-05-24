@@ -1,0 +1,43 @@
+name: Jula Workflow
+on: push
+
+env:
+  github_workspace: ${{ github.workspace }}
+  jula_connector_url: http://ec2-54-147-61-231.compute-1.amazonaws.com:8080
+
+jobs:
+
+  jula:
+    runs-on: ubuntu-20.04
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Collect required files
+        continue-on-error: true
+        id: collect-files
+        run: |
+          sudo apt update
+          sudo apt install -y wget python3
+          wget --quiet -P /tmp/jula https://raw.githubusercontent.com/MarshallBaby/JULA-GitHubActions-Agent/master/dist/collect-required-files.py
+          python3 /tmp/jula/collect-required-files.py
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        if: steps.collect-files.outcome == 'success'
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+
+      - name: Run Jula Agent
+        if: steps.collect-files.outcome == 'success'
+        run: |
+          wget --quiet -P /tmp/jula https://raw.githubusercontent.com/MarshallBaby/JULA-GitHubActions-Agent/master/dist/jula.jar
+          java -jar /tmp/jula/jula.jar
+
+      - name: Commit changes
+        if: steps.collect-files.outcome == 'success'
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: JULA Auto-generated tests.
