@@ -23,5 +23,7 @@ Workflow:
 8. @JULA:on annotations are removed from the source classes.
 9. All changes are committed.
 
+![img.png](readme/images/img.png)
+
 GitHub Actions Workflow example:
 [workflow-example.yml](readme/example/workflow-example.yml)
